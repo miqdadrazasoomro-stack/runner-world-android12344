@@ -1,6 +1,6 @@
  name: Build Runner World APK
 
-on:
+ "on":
   workflow_dispatch:
 
 jobs:
