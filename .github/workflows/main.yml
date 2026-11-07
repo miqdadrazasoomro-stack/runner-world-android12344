@@ -47,7 +47,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y imagemagick
-
           RES=android/app/src/main/res
 
           for item in "mdpi 48 108" "hdpi 72 162" "xhdpi 96 216" "xxhdpi 144 324" "xxxhdpi 192 432"; do
@@ -55,7 +54,6 @@ jobs:
             density=$1
             legacy=$2
             foreground=$3
-
             mkdir -p "$RES/mipmap-$density"
 
             convert icon.png -resize "${legacy}x${legacy}^" \
