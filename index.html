@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Runner World 3D</title>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css"></head><body>
+<canvas id="c"></canvas>
+
+<div class="scr on" id="menu">
+ <div class="stat" style="right:1.5vw"><span class="chip">🪙 <span id="mc">0</span></span><span class="chip">Best <span id="mb">0</span></span></div>
+ <div class="logo"><small>#</small><b class="a">RUNNER</b><b class="w">WORLD</b></div>
+ <div id="menuBtns">
+  <button class="btn g" id="play" onclick="startGame()">PLAY</button>
+  <button class="btn b" onclick="openP('chars')">Characters</button>
+  <button class="btn b" onclick="openP('shop')">Shop</button>
+  <button class="btn b" onclick="openP('missions')">Missions</button>
+  <button class="btn" onclick="openP('settings')">Settings</button>
+ </div>
+ <div id="panel"></div>
+</div>
+
+<div class="scr" id="hud">
+ <button class="btn" id="pause" onclick="pauseG()">❚❚</button>
+ <div id="score"><span class="s"><span id="mult">x1</span><span id="sc">0</span></span><div id="best"></div></div>
+ <div id="cn" class="chip">🪙 <span id="hc">0</span></div>
+ <div id="pus"></div>
+</div>
+
+<div class="scr" id="pauseS"><div class="ctr"><h1>PAUSED</h1><div class="flex"><button class="btn g" onclick="pauseG()">Resume</button><button class="btn" onclick="toMenu()">Main Menu</button></div></div></div>
+<div class="scr" id="over"><div class="ctr"><h1>GAME OVER</h1>
+ <p>Score <b id="os">0</b></p><p>Coins 🪙 <b id="oc">0</b></p><p>Best <b id="ob">0</b></p>
+ <div class="flex"><button class="btn g" onclick="startGame()">Restart</button><button class="btn" onclick="toMenu()">Main Menu</button></div></div></div>
+
+<!-- Three.js r128: uses js/lib/three.min.js if present (needed offline / for Android), otherwise the CDN -->
+<script src="js/lib/three.min.js"></script>
+<script>window.THREE||document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>')</script>
+<script src="js/game.js"></script>
+</body></html>

@@ -1,0 +1,39 @@
+:root{--cy:#19b5fe;--ye:#ffc619;--or:#ff7a18;--nv:#14125c;--rd:#e53935;--gr:#3ddc5a;--bg:#4fc3f7}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);font-family:'Lilita One',Impact,sans-serif;color:#fff;touch-action:none}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block}
+.scr{position:fixed;inset:0;display:none;pointer-events:none;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.scr.on{display:block}.scr>*{pointer-events:auto}
+.logo{position:absolute;top:2vh;left:0;right:0;text-align:center;line-height:.9;pointer-events:none;transform:rotate(-3deg)}
+.logo b{display:block;font-weight:400;font-size:min(17vw,110px);-webkit-text-stroke:min(1.6vw,9px) var(--nv);paint-order:stroke fill;filter:drop-shadow(0 6px 0 rgba(20,18,92,.55))}
+.logo .a{background:linear-gradient(#fff04a,#ff8a00);-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo .w{background:linear-gradient(#7af0ff,#1a6dff);-webkit-background-clip:text;background-clip:text;color:transparent;margin-top:-.08em}
+.logo small{font-size:min(7vw,44px);color:var(--ye);-webkit-text-stroke:5px var(--nv);paint-order:stroke fill}
+.stat{position:absolute;top:1.5vh;display:flex;gap:8px;font-size:18px}
+.chip{background:rgba(20,18,92,.78);border-radius:20px;padding:4px 14px;border:2px solid rgba(255,255,255,.25)}
+.btn{font:inherit;font-size:20px;color:var(--nv);background:linear-gradient(var(--ye),var(--or));border:3px solid var(--nv);border-radius:16px;padding:10px 18px;cursor:pointer;box-shadow:0 5px 0 var(--nv);transition:transform .08s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--nv)}
+.btn.g{background:linear-gradient(#7dff8f,#22b04a)}.btn.b{background:linear-gradient(#7af0ff,#1a8cff)}.btn.x{opacity:.55}
+#menuBtns{position:absolute;bottom:3vh;left:0;right:0;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;padding:0 10px}
+#play{font-size:34px;padding:12px 44px}
+#panel{position:absolute;left:50%;bottom:2vh;transform:translateX(-50%);width:min(94vw,620px);max-height:56vh;overflow:auto;background:rgba(20,18,92,.93);border:3px solid var(--cy);border-radius:22px;padding:14px;display:none}
+#panel h2{margin:0 0 8px;font-weight:400;color:var(--ye);font-size:28px}
+.row{display:flex;align-items:center;gap:10px;justify-content:space-between;background:rgba(255,255,255,.1);border-radius:14px;padding:8px 12px;margin:6px 0;font-size:18px}
+.bar{height:8px;background:rgba(255,255,255,.2);border-radius:5px;margin-top:4px;overflow:hidden}.bar i{display:block;height:100%;background:var(--gr)}
+.cl{float:right}
+#pause{position:absolute;top:1.5vh;left:1.5vw;width:54px;height:54px;padding:0;font-size:26px}
+#score{position:absolute;top:1.5vh;left:50%;transform:translateX(-50%);text-align:center;pointer-events:none}
+#score .s{display:inline-flex;align-items:center;gap:8px;background:rgba(20,18,92,.78);border-radius:14px;padding:2px 20px 2px 10px;font-size:34px}
+#mult{color:var(--gr);font-size:32px;-webkit-text-stroke:3px var(--nv);paint-order:stroke fill}
+#best{font-size:14px;opacity:.9;text-shadow:0 2px 0 #000}
+#cn{position:absolute;top:1.5vh;right:1.5vw;font-size:26px;pointer-events:none}
+#pus{position:absolute;top:70px;left:50%;transform:translateX(-50%);display:flex;gap:6px;pointer-events:none}
+.pu{background:rgba(20,18,92,.85);border:2px solid var(--cy);border-radius:12px;padding:2px 10px;font-size:15px}
+.ctr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:rgba(10,8,60,.6);text-align:center}
+.ctr h1{margin:0;font-weight:400;font-size:min(14vw,72px);color:var(--ye);-webkit-text-stroke:6px var(--nv);paint-order:stroke fill}
+.ctr p{margin:0;font-size:24px}
+.flex{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+
+/* Android touch: buttons receive taps directly, no 300ms/gesture interception */
+.btn,#panel .btn{touch-action:manipulation;-webkit-touch-callout:none}
+#panel{touch-action:pan-y;-webkit-overflow-scrolling:touch}
