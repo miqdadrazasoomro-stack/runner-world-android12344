@@ -1,4 +1,4 @@
-name: Build Runner World APK
+ name: Build Runner World APK
 
 on:
   workflow_dispatch:
@@ -33,12 +33,61 @@ jobs:
           test -f www/index.html
           test -f www/js/game.js
           test -f www/js/lib/three.min.js
+          test -f icon.png
+          test -f capacitor.config.json
+          test -f package.json
 
       - name: Install dependencies
         run: npm install
 
       - name: Add Android platform
         run: npx cap add android
+
+      - name: Generate app icons
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+
+          RES=android/app/src/main/res
+
+          for item in "mdpi 48 108" "hdpi 72 162" "xhdpi 96 216" "xxhdpi 144 324" "xxxhdpi 192 432"; do
+            set -- $item
+            density=$1
+            legacy=$2
+            foreground=$3
+
+            mkdir -p "$RES/mipmap-$density"
+
+            convert icon.png -resize "${legacy}x${legacy}^" \
+              -gravity center -extent "${legacy}x${legacy}" \
+              "$RES/mipmap-$density/ic_launcher.png"
+
+            cp "$RES/mipmap-$density/ic_launcher.png" \
+              "$RES/mipmap-$density/ic_launcher_round.png"
+
+            convert icon.png -resize "${foreground}x${foreground}" \
+              -gravity center -background none \
+              -extent "${foreground}x${foreground}" \
+              "$RES/mipmap-$density/ic_launcher_foreground.png"
+          done
+
+          mkdir -p "$RES/mipmap-anydpi-v26" "$RES/values"
+
+          cat > "$RES/values/runner_world_colors.xml" <<'EOF'
+          <resources>
+              <color name="runner_world_icon_background">#FFFFFF</color>
+          </resources>
+          EOF
+
+          cat > "$RES/mipmap-anydpi-v26/ic_launcher.xml" <<'EOF'
+          <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+              <background android:drawable="@color/runner_world_icon_background"/>
+              <foreground android:drawable="@mipmap/ic_launcher_foreground"/>
+          </adaptive-icon>
+          EOF
+
+          cp "$RES/mipmap-anydpi-v26/ic_launcher.xml" \
+             "$RES/mipmap-anydpi-v26/ic_launcher_round.xml"
 
       - name: Sync game
         run: npx cap sync android
